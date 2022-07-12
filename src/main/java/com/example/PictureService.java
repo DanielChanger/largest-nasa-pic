@@ -1,6 +1,7 @@
 package com.example;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -20,6 +21,7 @@ public class PictureService {
         this.picturesApiInfo = picturesApiInfo;
     }
 
+    @Cacheable("picture")
     public Optional<URI> getLargestPictureUri(int sol) {
         String requestUri = String.format("%s?%s={key}&%s={sol}",
                 picturesApiInfo.getPicturesUri(),
